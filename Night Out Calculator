@@ -1,0 +1,78 @@
+Student ID: 21307571
+Student Name: Kevin Hough
+Module: CS4221
+
+;This takes into account the price of drinks such as pints, shots, cocktails and other alcoholic beverages. It also accounts for how much money you have. The overall outcome is how drunk you get and how much of a good time you had.
+
+
+#lang racket
+;Prices of drink
+(define pint 4)
+(define shot 5)
+(define cocktail 10)
+;Implement how many drinks you had
+(define x 1) 
+(define y 2)
+(define z 3)
+;these functions just calculate how many you had all together 
+(define AmountPints (* cocktail x))
+(define AmountShots (* shot y))
+(define AmountCocktails (* cocktail z))
+(define AmountDrinks (+(+ AmountPints AmountShots)AmountCocktails))
+(display "Drinks:")(display AmountDrinks ) 'newline
+
+
+;This defines how much you have in your wallet at the start
+(define StartWallet 50)
+;This is how much you have left in your wallet after the drinks
+(define FinalWallet(- StartWallet AmountDrinks))
+  (if(< StartWallet AmountDrinks)
+;then
+     (display "Not Enough money")
+;else
+(display FinalWallet))
+'newline
+ 
+
+;This displays how drunk you are, judging from how much drink you have paid for.
+(if(or(< AmountDrinks 20)(< StartWallet AmountDrinks))
+    ;then
+    "Sober"
+    ;else
+    (if(and(> AmountDrinks 20)(< AmountDrinks 40))
+          ;then
+          "Tipsy"
+          ;else
+          (if(and(> AmountDrinks 40)(< AmountDrinks 60))
+             ;then
+             "Drunk"
+             ;else
+             (if(and(> AmountDrinks 60)(< AmountDrinks 80))
+                ;then
+                "Wobbly"
+                ;else
+                (if (and (> AmountDrinks 80)(< AmountDrinks 100))
+                    ;then
+                    "Plastered"
+                    ;else
+                    (if(> AmountDrinks 100)
+                       ;then
+                       "Wasted"
+                       ;else
+                       "nothing"
+          ))))))
+;Uses the Data gathered to determine whether you had a good night or not
+(if(and(> AmountDrinks 50)(< AmountDrinks StartWallet))
+   ;then
+   (display "Yeah it was a good night")
+   ;else
+   (display "Nope, Shite night")
+      )
+
+
+
+Test Data:
+x = 2, y = 3 z = 0, Wallet = 30
+x = 10, y = 0, z = 2, Wallet = 80
+x = 5, y = 2, z = 6, Wallet = 100
+x = 20, y = 4, z = 3, Wallet = 120
